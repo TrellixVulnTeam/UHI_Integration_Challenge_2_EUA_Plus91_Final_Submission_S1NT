@@ -1,0 +1,27 @@
+<ion-app>
+  <ion-split-pane contentId="main-content">
+    <ion-menu id="sidebar" contentId="main-content" type="overlay" swipe-gesture="false">
+      <ion-content>
+        <ion-list class="text-center p-0 my-5">
+          <img src="./assets/abdm.svg" alt="" style="width: 200px;">
+        </ion-list>
+        <hr>
+        <ion-list id="inbox-list" class="p-0 border-0">
+          <ion-menu-toggle auto-hide="false" *ngFor="let p of appPages; let i = index">
+            <ion-item routerDirection="root" [routerLink]="[p.url]" lines="none" detail="false" routerLinkActive="selected">
+              <img [src]="p.icon" alt="" width="20px" class="me-2">
+              <ion-label>{{ p.title }}</ion-label>
+            </ion-item>
+          </ion-menu-toggle>
+        </ion-list>
+
+      </ion-content>
+      <ion-footer>
+        <div class="text-center my-3">
+          <img src="https://plus91.in/wp-content/uploads/2019/12/logo123.jpg" alt="" width="70px">
+        </div>
+      </ion-footer>
+    </ion-menu>
+    <ion-router-outlet id="main-content"></ion-router-outlet>
+  </ion-split-pane>
+</ion-app>

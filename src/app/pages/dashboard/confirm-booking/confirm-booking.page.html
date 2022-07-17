@@ -1,0 +1,49 @@
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-menu-button></ion-menu-button>
+    </ion-buttons>
+    <ion-title>Appointment Status</ion-title>
+    <ion-buttons slot="secondary">
+      <ion-back-button defaultHref="/dashboard/book-appointment"></ion-back-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true">
+  <div class="container-fluid w-100 h-100 p-3">
+    <div class="w-100 d-block">
+
+      <div class="d-flex justify-content-center w-100">
+        <div class="d-flex align-items-center">
+          <ion-icon color="success" class="fs-20" name="checkbox"></ion-icon>
+          <span class="fs-18 ms-2" style="color: var(--ion-color-success, #2dd36f);font-weight: 700;">Appointment Status - Confirmed</span>
+        </div>
+      </div>
+
+      <div class="w-100 text-center mt-2">
+        <span class="text-muted fs-14">Your teleconsultation appointment is confirmed!</span>
+      </div>
+
+      <!-- <ion-card *ngFor="let doctor of this._commonService.searchResults.fulfillments[this.search_index]">
+        <ion-item class="border-0" lines="none">
+          <div class="h-100" style="padding-top: 5px;padding-bottom: 5px;">
+            <img [src]="doctor.agent.gender=='male'?'assets/male-doctor.png':'assets/female-doctor.png'" alt="" style="width: 60px;margin: 5px 15px 5px 0px;border-radius: 100%;">
+          </div>
+          <ion-label>
+            {{doctor.agent.name}}<br>
+            <span class="text-muted">Radiology{{doctor.doctor_service_type}}</span><br>
+            <span style="color: #3880ff;"><b>doctor.hrp@hpr.abdm</b></span><br>
+            <ion-card-subtitle class="mt-2">Marathi / Hindi / English<br>12 Yrs of Experience</ion-card-subtitle>
+          </ion-label>
+        </ion-item>
+        <ion-card-content class="m-0 p-2">
+          <div class="d-flex flex-wrap justify-content-start">
+            <span style="color: red; font-size: 18px; font-weight: 800;margin-left: 15px;">{{doctor.quote.price.value}}/-<span style="font-size: 12px; font-weight:600;margin-left: 10px;color: var(--ion-color-primary);">Medixcel</span></span>
+          </div>
+        </ion-card-content>
+      </ion-card> -->
+
+    </div>
+  </div>
+</ion-content>

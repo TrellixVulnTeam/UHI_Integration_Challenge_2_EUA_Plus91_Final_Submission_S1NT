@@ -1,0 +1,43 @@
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-menu-button></ion-menu-button>
+    </ion-buttons>
+    <ion-title>Search Results</ion-title>
+    <ion-buttons slot="secondary">
+      <ion-back-button defaultHref="/dashboard/home"></ion-back-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true">
+  <div class="container-fluid w-100 h-100 p-3">
+    <div class="d-flex flex-wrap w-100 h-100">
+    
+      <div class="d-block col-lg-12">
+        <ion-card>
+          <ion-item class="border-0">
+            <div class="h-100" style="padding-top: 11px;">
+              <img src="assets/download.jpeg" alt="" style="width: 60px;margin: 5px 15px 5px 0px;border-radius: 100%;">
+            </div>
+            <ion-label>
+              Dr. Daniel Paul<br>
+              <span class="text-muted">MBBS/MS Cardiology</span><br>
+              <span style="color: #3880ff;"><b>doctor.hrp@hpr.abdm</b></span><br>
+              <ion-card-subtitle class="mt-2">Marathi / Hindi / English<br>12 Yrs of Experience</ion-card-subtitle>
+            </ion-label>
+          </ion-item>
+          
+          <ion-card-content class="m-0 p-0">
+            <div class="d-flex flex-wrap justify-content-between">
+              <ion-button style="color: #3880ff;" fill=""><ion-icon color="primary" slot="start" name="close"></ion-icon>Cancel</ion-button>
+              <ion-button style="color: #3880ff;" fill=""><ion-icon color="primary" slot="start" name="calendar"></ion-icon>Reschedule</ion-button>
+              <ion-button style="color: #3880ff;" fill=""><ion-icon color="primary" slot="start" name="chatbubble-ellipses"></ion-icon>Chat</ion-button>
+            </div>
+          </ion-card-content>
+        </ion-card>  
+      </div>
+      
+    </div>
+  </div>
+</ion-content>

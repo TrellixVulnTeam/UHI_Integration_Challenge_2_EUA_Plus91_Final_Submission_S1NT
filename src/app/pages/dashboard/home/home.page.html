@@ -1,0 +1,301 @@
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-menu-button></ion-menu-button>
+    </ion-buttons>
+    <ion-title>Dashboard</ion-title>
+    <ion-buttons slot="end">
+      <ion-icon color="primary" slot="start" name="search" (click)="toggleSearchOption()"></ion-icon>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true">
+  
+  <div class="container-fluid w-100 h-100 p-3">
+
+
+    <!-- <div id="the-basics">
+      <input class="typeahead" type="text" placeholder="States of USA">
+    </div> -->
+    
+    <!-- Search -->
+    <!-- <input type="text" [value]="query" placeholder="type to see jsonp results from google" ngxTypeahead class="col-sm-12 form-control" [taUrl]="url" [taParams]="params" (taSelected)="handleResultSelected($event)"> -->
+    <div *ngIf="isSearchOpen" class="container-fluid d-block col-12 p-0 m-0 mb-3">
+      <ion-item class="fs-12">
+        <ion-label position="stacked">Search</ion-label>
+        <ion-input id="searchInput" autocorrect="on" spellcheck="true" autocomplete="on" placeholder="Eg. Cadiologist with 5Yr experience" value="cardiologist near me"></ion-input>
+        <!-- <input autocomplete="on" spellcheck="true" type="text" name="textinput" placeholder="Enter a test" spellcheck="on">
+        <input autocomplete="on" autocorrect="on" type="text" name="textinput" placeholder="Enter a test" spellcheck="on"> -->
+      </ion-item>
+
+      <div class="d-flex">
+        <ion-item class="col-6 fs-12">
+          <ion-label position="floating">Start Date</ion-label>
+          <ion-input id="start_date" type="date" min="2022-07-14" placeholder="Start Date" (change)="onStartDateChange()" value="2022-07-14"></ion-input>
+        </ion-item>
+        <ion-item class="col-6 fs-12">
+          <ion-label position="floating">End Date</ion-label>
+          <ion-input id="end_date" type="date" min="2022-07-14" placeholder="End Date" value="2022-07-15"></ion-input>
+        </ion-item>
+      </div>
+
+      <ion-button expand="full" class="mt-2 fs-12" (click)="search()"><ion-icon slot="start" name="search"></ion-icon>Search</ion-button>
+
+      <hr class="mt-4" style="background-color: #adadad;">
+    </div>
+    
+    <!-- Upcoming Appointments -->
+    <div class="d-block">
+      <h5 class="mb-3 fs-16">Upcoming Appointments</h5>
+      <ion-card class="m-0 p-0">
+        <ion-item class="fs-12">
+          <img src="assets/download.jpeg" alt="" style="width: 60px;margin: 5px 10px 5px 0px;border-radius: 100%;">
+          <ion-label>
+            Dr. Daniel Paul<br>
+            20 minutes<br>
+            <ion-card-subtitle>Tommorrow at 9:00 AM</ion-card-subtitle>
+          </ion-label>
+        </ion-item>
+        
+        <ion-card-content class="m-0 p-0">
+          <div class="d-flex flex-wrap justify-content-between">
+            <ion-button style="color: #3880ff;font-size: 12px;" fill=""><ion-icon color="primary" slot="start" name="close"></ion-icon>Cancel</ion-button>
+            <ion-button style="color: #3880ff;font-size: 12px;" fill=""><ion-icon color="primary" slot="start" name="calendar"></ion-icon>Reschedule</ion-button>
+            <ion-button style="color: #3880ff;font-size: 12px;" fill=""><ion-icon color="primary" slot="start" name="chatbubble-ellipses"></ion-icon>Chat</ion-button>
+          </div>
+        </ion-card-content>
+      </ion-card>
+    </div>
+    
+    <hr class="mt-4" style="background-color: #adadad;">
+    <!-- Appointment History -->
+    <div class="d-block">
+      <h5 class="mb-3 fs-16">Appointment History</h5>
+      
+      <ion-card class="m-0 p-0 mb-4">
+        <ion-item class="fs-12">
+          <img src="assets/download.jpeg" alt="" style="width: 60px;margin: 5px 10px 5px 0px;border-radius: 100%;">
+          <ion-label>
+            Dr. Daniel Paul<br>
+            20 minutes<br>
+            <ion-card-subtitle>Yesterdat at 9:00 AM</ion-card-subtitle>
+          </ion-label>
+        </ion-item>
+      </ion-card>
+
+      <ion-card class="m-0 p-0 mb-4">
+        <ion-item class="fs-12">
+          <img src="assets/download.jpeg" alt="" style="width: 60px;margin: 5px 10px 5px 0px;border-radius: 100%;">
+          <ion-label>
+            Dr. Daniel Paul<br>
+            20 minutes<br>
+            <ion-card-subtitle>1 Jul, 2022 at 9:00 AM</ion-card-subtitle>
+          </ion-label>
+        </ion-item>
+      </ion-card>
+      
+      <ion-card class="m-0 p-0 mb-4">
+        <ion-item class="fs-12">
+          <img src="assets/download.jpeg" alt="" style="width: 60px;margin: 5px 10px 5px 0px;border-radius: 100%;">
+          <ion-label>
+            Dr. Daniel Paul<br>
+            20 minutes<br>
+            <ion-card-subtitle>29 Jun, 2022 at 9:00 AM</ion-card-subtitle>
+          </ion-label>
+        </ion-item>
+      </ion-card>
+      
+      <ion-card class="m-0 p-0 mb-4">
+        <ion-item class="fs-12">
+          <img src="assets/download.jpeg" alt="" style="width: 60px;margin: 5px 10px 5px 0px;border-radius: 100%;">
+          <ion-label>
+            Dr. Daniel Paul<br>
+            20 minutes<br>
+            <ion-card-subtitle>17 Jun, 2022 at 9:00 AM</ion-card-subtitle>
+          </ion-label>
+        </ion-item>
+      </ion-card>
+      
+      <ion-card class="m-0 p-0 mb-4">
+        <ion-item class="fs-12">
+          <img src="assets/download.jpeg" alt="" style="width: 60px;margin: 5px 10px 5px 0px;border-radius: 100%;">
+          <ion-label>
+            Dr. Daniel Paul<br>
+            20 minutes<br>
+            <ion-card-subtitle>Yesterdat at 9:00 AM</ion-card-subtitle>
+          </ion-label>
+        </ion-item>
+      </ion-card>
+      
+      <ion-card class="m-0 p-0 mb-4">
+        <ion-item class="fs-12">
+          <img src="assets/download.jpeg" alt="" style="width: 60px;margin: 5px 10px 5px 0px;border-radius: 100%;">
+          <ion-label>
+            Dr. Daniel Paul<br>
+            20 minutes<br>
+            <ion-card-subtitle>Yesterdat at 9:00 AM</ion-card-subtitle>
+          </ion-label>
+        </ion-item>
+      </ion-card>
+      
+      <ion-card class="m-0 p-0 mb-4">
+        <ion-item class="fs-12">
+          <img src="assets/download.jpeg" alt="" style="width: 60px;margin: 5px 10px 5px 0px;border-radius: 100%;">
+          <ion-label>
+            Dr. Daniel Paul<br>
+            20 minutes<br>
+            <ion-card-subtitle>Yesterdat at 9:00 AM</ion-card-subtitle>
+          </ion-label>
+        </ion-item>
+      </ion-card>
+      
+      <ion-card class="m-0 p-0 mb-4">
+        <ion-item class="fs-12">
+          <img src="assets/download.jpeg" alt="" style="width: 60px;margin: 5px 10px 5px 0px;border-radius: 100%;">
+          <ion-label>
+            Dr. Daniel Paul<br>
+            20 minutes<br>
+            <ion-card-subtitle>Yesterdat at 9:00 AM</ion-card-subtitle>
+          </ion-label>
+        </ion-item>
+      </ion-card>
+      
+      <ion-card class="m-0 p-0 mb-4">
+        <ion-item class="fs-12">
+          <img src="assets/download.jpeg" alt="" style="width: 60px;margin: 5px 10px 5px 0px;border-radius: 100%;">
+          <ion-label>
+            Dr. Daniel Paul<br>
+            20 minutes<br>
+            <ion-card-subtitle>Yesterdat at 9:00 AM</ion-card-subtitle>
+          </ion-label>
+        </ion-item>
+      </ion-card>
+      
+      <ion-card class="m-0 p-0 mb-4">
+        <ion-item class="fs-12">
+          <img src="assets/download.jpeg" alt="" style="width: 60px;margin: 5px 10px 5px 0px;border-radius: 100%;">
+          <ion-label>
+            Dr. Daniel Paul<br>
+            20 minutes<br>
+            <ion-card-subtitle>Yesterdat at 9:00 AM</ion-card-subtitle>
+          </ion-label>
+        </ion-item>
+      </ion-card>
+      
+      <ion-card class="m-0 p-0 mb-4">
+        <ion-item class="fs-12">
+          <img src="assets/download.jpeg" alt="" style="width: 60px;margin: 5px 10px 5px 0px;border-radius: 100%;">
+          <ion-label>
+            Dr. Daniel Paul<br>
+            20 minutes<br>
+            <ion-card-subtitle>Yesterdat at 9:00 AM</ion-card-subtitle>
+          </ion-label>
+        </ion-item>
+      </ion-card>
+      
+      <ion-card class="m-0 p-0 mb-4">
+        <ion-item class="fs-12">
+          <img src="assets/download.jpeg" alt="" style="width: 60px;margin: 5px 10px 5px 0px;border-radius: 100%;">
+          <ion-label>
+            Dr. Daniel Paul<br>
+            20 minutes<br>
+            <ion-card-subtitle>Yesterdat at 9:00 AM</ion-card-subtitle>
+          </ion-label>
+        </ion-item>
+      </ion-card>
+      
+      <ion-card class="m-0 p-0 mb-4">
+        <ion-item class="fs-12">
+          <img src="assets/download.jpeg" alt="" style="width: 60px;margin: 5px 10px 5px 0px;border-radius: 100%;">
+          <ion-label>
+            Dr. Daniel Paul<br>
+            20 minutes<br>
+            <ion-card-subtitle>Yesterdat at 9:00 AM</ion-card-subtitle>
+          </ion-label>
+        </ion-item>
+      </ion-card>
+      
+      <ion-card class="m-0 p-0 mb-4">
+        <ion-item class="fs-12">
+          <img src="assets/download.jpeg" alt="" style="width: 60px;margin: 5px 10px 5px 0px;border-radius: 100%;">
+          <ion-label>
+            Dr. Daniel Paul<br>
+            20 minutes<br>
+            <ion-card-subtitle>Yesterdat at 9:00 AM</ion-card-subtitle>
+          </ion-label>
+        </ion-item>
+      </ion-card>
+      
+      <ion-card class="m-0 p-0 mb-4">
+        <ion-item class="fs-12">
+          <img src="assets/download.jpeg" alt="" style="width: 60px;margin: 5px 10px 5px 0px;border-radius: 100%;">
+          <ion-label>
+            Dr. Daniel Paul<br>
+            20 minutes<br>
+            <ion-card-subtitle>Yesterdat at 9:00 AM</ion-card-subtitle>
+          </ion-label>
+        </ion-item>
+      </ion-card>
+      
+      <ion-card class="m-0 p-0 mb-4">
+        <ion-item class="fs-12">
+          <img src="assets/download.jpeg" alt="" style="width: 60px;margin: 5px 10px 5px 0px;border-radius: 100%;">
+          <ion-label>
+            Dr. Daniel Paul<br>
+            20 minutes<br>
+            <ion-card-subtitle>Yesterdat at 9:00 AM</ion-card-subtitle>
+          </ion-label>
+        </ion-item>
+      </ion-card>
+      
+      <ion-card class="m-0 p-0 mb-4">
+        <ion-item class="fs-12">
+          <img src="assets/download.jpeg" alt="" style="width: 60px;margin: 5px 10px 5px 0px;border-radius: 100%;">
+          <ion-label>
+            Dr. Daniel Paul<br>
+            20 minutes<br>
+            <ion-card-subtitle>Yesterdat at 9:00 AM</ion-card-subtitle>
+          </ion-label>
+        </ion-item>
+      </ion-card>
+      
+      <ion-card class="m-0 p-0 mb-4">
+        <ion-item class="fs-12">
+          <img src="assets/download.jpeg" alt="" style="width: 60px;margin: 5px 10px 5px 0px;border-radius: 100%;">
+          <ion-label>
+            Dr. Daniel Paul<br>
+            20 minutes<br>
+            <ion-card-subtitle>Yesterdat at 9:00 AM</ion-card-subtitle>
+          </ion-label>
+        </ion-item>
+      </ion-card>
+      
+      <ion-card class="m-0 p-0 mb-4">
+        <ion-item class="fs-12">
+          <img src="assets/download.jpeg" alt="" style="width: 60px;margin: 5px 10px 5px 0px;border-radius: 100%;">
+          <ion-label>
+            Dr. Daniel Paul<br>
+            20 minutes<br>
+            <ion-card-subtitle>Yesterdat at 9:00 AM</ion-card-subtitle>
+          </ion-label>
+        </ion-item>
+      </ion-card>
+      
+      <ion-card class="m-0 p-0 mb-4">
+        <ion-item class="fs-12">
+          <img src="assets/download.jpeg" alt="" style="width: 60px;margin: 5px 10px 5px 0px;border-radius: 100%;">
+          <ion-label>
+            Dr. Daniel Paul<br>
+            20 minutes<br>
+            <ion-card-subtitle>Yesterdat at 9:00 AM</ion-card-subtitle>
+          </ion-label>
+        </ion-item>
+      </ion-card>
+      
+      
+    </div>
+    
+  </div>
+  
+</ion-content>

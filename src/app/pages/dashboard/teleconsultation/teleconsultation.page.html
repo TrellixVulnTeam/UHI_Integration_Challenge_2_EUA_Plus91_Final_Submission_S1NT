@@ -1,0 +1,155 @@
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-menu-button></ion-menu-button>
+    </ion-buttons>
+    <ion-title>Book a Teleconsultation</ion-title>
+    <ion-buttons slot="secondary">
+      <ion-back-button defaultHref="/dashboard/home"></ion-back-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true">
+  <div class="container-fluid w-100 h-100 p-3">
+    <h6>Find your Doctor / health care provider</h6>
+    
+    <div class="d-block">
+      <ion-item class="col-12">
+        <ion-label position="floating">Doctor's name / HPR Address</ion-label>
+        <ion-input></ion-input>
+      </ion-item>
+    </div>
+    
+    <div class="d-flex flex-wrap my-4 justify-content-between">
+      <div class="col-lg-6 col-md-6 col-12 pe-lg-2 pe-md-2">
+        <div class="form-floating">
+          <select class="form-select" id="servicesSelect" aria-label="">
+            <option selected>Select Services</option>
+            <option value="1">Mental health care</option>
+            <option value="2">Dental care</option>
+            <option value="3">Laboratory and diagnostic care</option>
+            <option value="4">Substance abuse treatment</option>
+            <option value="5">Preventative care</option>
+            <option value="6">Physical and occupational therapy</option>
+            <option value="7">Nutritional support</option>
+            <option value="8">Pharmaceutical care</option>
+            <option value="9">Transportation</option>
+            <option value="10">Prenatal care</option>
+          </select>
+          <label for="servicesSelect">Services</label>
+        </div>
+      </div>
+      
+      <div class="col-lg-6 col-md-6 col-12 ps-lg-2 ps-md-2 mt-lg-0 mt-md-0 mt-3">
+        <div class="form-floating">
+          <select class="form-select" id="languageSelect" aria-label="">
+            <option selected>Select Language</option>
+            <option value="1">English</option>
+            <option value="2">Hindi</option>
+            <option value="3">Marathi</option>
+          </select>
+          <label for="languageSelect">Language</label>
+        </div>
+      </div>
+    </div>
+
+    <div class="d-flex flex-wrap my-4 justify-content-between">
+      <div class="col-lg-6 col-md-6 col-12 pe-lg-2 pe-md-2">
+        <div class="form-floating">
+          <select class="form-select" id="medicalSystemSelect" aria-label="">
+            <option selected>Select Medical System</option>
+            <option value="1">Internal Medicines</option>
+            <option value="2">External Medicines</option>
+          </select>
+          <label for="medicalSystemSelect">Medical System</label>
+        </div>
+      </div>
+      
+      <div class="col-lg-6 col-md-6 col-12 ps-lg-2 ps-md-2 mt-lg-0 mt-md-0 mt-3">
+        <div class="form-floating">
+          <select class="form-select" id="genderSelect" aria-label="">
+            <option selected>Select Gender</option>
+            <option value="1">Male</option>
+            <option value="2">Female</option>
+          </select>
+          <label for="genderSelect">Gender</label>
+        </div>
+      </div>
+    </div>
+
+    <div class="d-flex flex-wrap my-4 justify-content-between">
+      <div class="col-lg-6 col-md-6 col-12 pe-lg-2 pe-md-2">
+        <div class="form-floating">
+          <select class="form-select" id="experienceSystemSelect" aria-label="">
+            <option selected>Select Experience</option>
+            <option value="1">1</option>
+            <option value="2">2</option>
+            <option value="3">3</option>
+            <option value="4">4</option>
+            <option value="5">5</option>
+            <option value="6">6</option>
+            <option value="7">7</option>
+            <option value="8">8</option>
+            <option value="9">9</option>
+            <option value="10">10</option>
+            <option value="11">greater than 10</option>
+          </select>
+          <label for="experienceSystemSelect">Experience</label>
+        </div>
+      </div>
+      
+      <div class="col-lg-6 col-md-6 col-12 ps-lg-2 ps-md-2 mt-lg-0 mt-md-0 mt-3">
+
+      </div>
+    </div>
+
+    <div class="d-flex flex-wrap my-4 justify-content-between">
+      <div class="col-lg-6 col-md-6 col-12 pe-lg-2 pe-md-2">
+        <ion-item>
+          <ion-label position="stacked">From Date</ion-label>
+          <ion-input type="date" min="2022-07-14" max="2022-07-17"></ion-input>
+        </ion-item>
+      </div>
+      <div class="col-lg-6 col-md-6 col-12 ps-lg-2 ps-md-2 mt-lg-0 mt-md-0 mt-3">
+        <ion-item>
+          <ion-label position="stacked">To Date</ion-label>
+          <ion-input type="date" min="2022-07-14" max="2022-07-17"></ion-input>
+        </ion-item>
+      </div>
+    </div>
+
+    <div class="d-flex flex-wrap my-4 justify-content-between">
+      <div class="col-12">
+        <ion-item>
+          <ion-label position="floating">Symptoms</ion-label>
+          <ion-input type="text"></ion-input>
+        </ion-item>
+      </div>
+    </div>
+
+    <div class="position-absolute bottom-0 col-12 mb-lg-5">
+      <div class="col-12 d-flex justify-content-center">
+        <ion-button routerLink="/dashboard/teleconsultation/search-result">Find Doctor</ion-button>
+      </div>
+    </div>
+    
+    <!-- <ion-list>
+      <ion-item>
+        <ion-select placeholder="Select Service">
+          <ion-select-option value="1">Mental health care</ion-select-option>
+          <ion-select-option value="2">Dental care</ion-select-option>
+          <ion-select-option value="3">Laboratory and diagnostic care</ion-select-option>
+          <ion-select-option value="4">Substance abuse treatment</ion-select-option>
+          <ion-select-option value="5">Preventative care</ion-select-option>
+          <ion-select-option value="6">Physical and occupational therapy</ion-select-option>
+          <ion-select-option value="7">Nutritional support</ion-select-option>
+          <ion-select-option value="8">Pharmaceutical care</ion-select-option>
+          <ion-select-option value="9">Transportation</ion-select-option>
+          <ion-select-option value="10">Prenatal care</ion-select-option>
+        </ion-select>
+      </ion-item>
+    </ion-list> -->
+    
+  </div>
+</ion-content>

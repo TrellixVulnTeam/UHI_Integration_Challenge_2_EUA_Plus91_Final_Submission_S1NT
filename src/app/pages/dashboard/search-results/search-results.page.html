@@ -1,0 +1,81 @@
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-menu-button></ion-menu-button>
+    </ion-buttons>
+    <ion-title>Search Results</ion-title>
+    <ion-buttons slot="secondary">
+      <ion-back-button defaultHref="/dashboard/home"></ion-back-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true">
+  <div class="container-fluid w-100 h-100 p-3">
+
+    <div *ngIf="_commonService.searchResults.fulfillments.length==0" class="col-12 text-center">
+      No Doctors Found
+    </div>
+
+    <div *ngIf="_commonService.searchResults.fulfillments.length>0" class="d-block w-100 h-100">
+
+      <div *ngFor="let fulfillment of this._commonService.searchResults.fulfillments;index as i;" class="d-block col-12">
+        <ion-card class="m-0 p-0 mb-3">
+          <ion-item class="border-0">
+            <div class="h-100" style="padding-top: 5px;padding-bottom: 5px;">
+              <img [src]="fulfillment.agent.gender=='M'?'assets/male-doctor.png':'assets/female-doctor.png'" alt="" style="width: 60px;margin: 5px 15px 5px 0px;border-radius: 100%;">
+            </div>
+            <ion-label>
+              {{ fulfillment.agent.name }}<br>
+              <span class="text-muted fs-14">{{ fulfillment.type }} / {{fulfillment.items.descriptor.name}} {{fulfillment.agent.tags["@abdm/gov/in/education"]?"/"+fulfillment.agent.tags["@abdm/gov/in/education"]:""}}</span><br>
+              <span style="color: #3880ff;"><b>{{fulfillment.agent.tags["@abdm/gov/in/hpr_id"]}}</b></span><br *ngIf="fulfillment.agent.tags['@abdm/gov/in/hpr_id']">
+              <ion-card-subtitle>{{fulfillment.agent.tags["@abdm/gov/in/languages"]}}<br>{{fulfillment.agent.tags["@abdm/gov/in/experience"]}}</ion-card-subtitle>
+            </ion-label>
+          </ion-item>
+          
+          <ion-card-content class="m-0 p-2">
+            <div class="d-flex flex-wrap justify-content-start">
+              <ion-chip outline color="primary" (click)="book_appointment(i,fulfillment);">
+                <ion-label>
+                  <span style="color: red;font-size : 16px;font-weight: 700;">Rs. {{fulfillment.items.price.value}}</span>
+                  <span style="font-size: 12px; font-weight:600;margin-left: 10px;color: var(--ion-color-primary);">{{fulfillment.context.provider_id}}</span>
+                </ion-label>
+              </ion-chip>
+            </div>
+          </ion-card-content>
+        </ion-card>  
+      </div>
+    
+      <!-- <div *ngFor="let searchResult of _commonService.searchResults;index as i;" class="d-block col-12">
+        <ion-card>
+          <ion-item class="border-0">
+            <div class="h-100" style="padding-top: 5px;padding-bottom: 5px;">
+              <img [src]="searchResult.doctor_img!=''?searchResult.doctor_img:searchResult.doctor_gender=='male'?'assets/male-doctor.png':'assets/female-doctor.png'" alt="" style="width: 60px;margin: 5px 15px 5px 0px;border-radius: 100%;">
+            </div>
+            <ion-label>
+              {{ searchResult.doctor_name }}<br>
+              <span class="text-muted">{{ searchResult.doctor_service_type }} {{searchResult.doctor_service_category}}</span><br>
+              <span style="color: #3880ff;"><b>doctor.hrp@hpr.abdm</b></span><br>
+              <ion-card-subtitle class="mt-2">Marathi / Hindi / English<br>12 Yrs of Experience</ion-card-subtitle>
+            </ion-label>
+          </ion-item>
+          
+          <ion-card-content class="m-0 p-2">
+            <div class="d-flex flex-wrap justify-content-start">
+              <ion-chip outline color="primary" (click)="book_appointment(i,searchResult);">
+                <ion-label>
+                  <span style="color: red;font-size : 16px;font-weight: 700;">Rs. {{searchResult.quote.price.value}}</span>
+                  <span style="font-size: 12px; font-weight:600;margin-left: 10px;color: var(--ion-color-primary);">{{searchResult.service_provider}}</span>
+                </ion-label>
+              </ion-chip>
+              <ion-button size="small" (click)="book_appointment(searchResult);">Book Appointment</ion-button>
+              <ion-button style="color: #3880ff;" fill=""><ion-icon color="primary" slot="start" name="calendar"></ion-icon>Reschedule</ion-button>
+              <ion-button style="color: #3880ff;" fill=""><ion-icon color="primary" slot="start" name="chatbubble-ellipses"></ion-icon>Chat</ion-button>
+            </div>
+          </ion-card-content>
+        </ion-card>  
+      </div> -->
+      
+    </div>
+  </div>
+</ion-content>

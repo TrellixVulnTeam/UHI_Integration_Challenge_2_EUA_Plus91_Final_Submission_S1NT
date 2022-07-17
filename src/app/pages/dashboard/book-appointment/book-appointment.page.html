@@ -1,0 +1,74 @@
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-menu-button></ion-menu-button>
+    </ion-buttons>
+    <ion-title>Book Appointment</ion-title>
+    <ion-buttons slot="secondary">
+      <ion-back-button defaultHref="/dashboard/search-results"></ion-back-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true">
+  <div class="container-fluid w-100 h-100 p-3">
+  <!-- <ion-card *ngFor="let doctor of this._commonService.searchResults.fulfillments[this.search_index]">
+    <ion-item class="border-0" lines="none">
+      <div class="h-100" style="padding-top: 5px;padding-bottom: 5px;">
+        <img [src]="doctor.agent.gender=='male'?'assets/male-doctor.png':'assets/female-doctor.png'" alt="" style="width: 60px;margin: 5px 15px 5px 0px;border-radius: 100%;">
+      </div>
+      <ion-label>
+        {{doctor.agent.name}}<br>
+        <span class="text-muted">Radiology{{doctor.doctor_service_type}}</span><br>
+        <span style="color: #3880ff;"><b>doctor.hrp@hpr.abdm</b></span><br>
+        <ion-card-subtitle class="mt-2">Marathi / Hindi / English<br>12 Yrs of Experience</ion-card-subtitle>
+      </ion-label>
+    </ion-item>
+    <ion-card-content class="m-0 p-2">
+      <div class="d-flex flex-wrap justify-content-start">
+        <span style="color: red; font-size: 18px; font-weight: 800;margin-left: 15px;">{{doctor.quote.price.value}}/-<span style="font-size: 12px; font-weight:600;margin-left: 10px;color: var(--ion-color-primary);">Medixcel</span></span>
+      </div>
+    </ion-card-content>
+  </ion-card> -->
+
+  <ion-card class="m-0 b-0 mb-3">
+    <ion-item class="border-0" lines="none">
+      <div class="h-100" style="padding-top: 5px;padding-bottom: 5px;">
+        <img [src]="this._commonService.searchResults.fulfillments[this.search_index].agent.gender=='M'?'assets/male-doctor.png':'assets/female-doctor.png'" alt="" style="width: 60px;margin: 5px 15px 5px 0px;border-radius: 100%;">
+      </div>
+      <ion-label>
+        {{ this._commonService.searchResults.fulfillments[this.search_index].agent.name }}<br>
+        <span class="text-muted">{{ this._commonService.searchResults.fulfillments[this.search_index].type }} {{this._commonService.searchResults.fulfillments[this.search_index].agent.tags["@abdm/gov/in/speciality"]}} {{this._commonService.searchResults.fulfillments[this.search_index].agent.tags["@abdm/gov/in/education"]?"/"+this._commonService.searchResults.fulfillments[this.search_index].agent.tags["@abdm/gov/in/education"]:""}}</span><br>
+        <span style="color: #3880ff;"><b>{{this._commonService.searchResults.fulfillments[this.search_index].agent.tags["@abdm/gov/in/hpr_id"]}}</b></span><br *ngIf="this._commonService.searchResults.fulfillments[this.search_index].agent.tags['@abdm/gov/in/hpr_id']">
+        <ion-card-subtitle>{{this._commonService.searchResults.fulfillments[this.search_index].agent.tags["@abdm/gov/in/languages"]}}<br>{{this._commonService.searchResults.fulfillments[this.search_index].agent.tags["@abdm/gov/in/experience"]}}</ion-card-subtitle>
+      </ion-label>
+    </ion-item>
+  </ion-card>
+
+  <div class="w-100 d-block" style="max-height: calc(100% - 106px - 64px);overflow: auto;">
+    <div class="d-block col-12" style="padding: 10px;">
+      <div class="col-5 mt-2">
+        <div class="form">
+          <select class="form-select bg-primary text-white" id="slotSelect" aria-label="">
+            <option class="bg-white text-dark">Select Date</option>
+            <option class="bg-white text-dark" value="1" selected>{{slot_date_option}}</option>
+          </select>
+        </div>
+      </div>
+      <div class="d-block col-12 mt-4">
+        <span class="text-muted">Please choose one time slot from below</span>
+      </div>
+      <div class="col-12 d-block mt-1" id="time_slots_div">
+        <ion-chip outline color="primary" *ngFor="let timeSlot of availableTimeSlots;index as i" [id]="'time_slot'+i" (click)="select_slots(i)">
+          <ion-label>{{timeSlot[0]}} - {{timeSlot[1]}}</ion-label  >
+        </ion-chip>
+      </div>
+    </div>
+
+  </div>
+
+  <div class="position-absolute start-0 bottom-0 px-3 d-block w-100" style="padding: 10px;">
+    <ion-button expand="full" (click)="init()">Book Now</ion-button>
+  </div>
+</div>
+</ion-content>
