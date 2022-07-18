@@ -26,7 +26,7 @@ export class HomePage implements OnInit {
   // };
   // public query = "test";
   
-  public isSearchOpen: boolean = true;
+  public isSearchOpen: boolean = false;
   
   public homeOption=[
     { title: 'Teleconsultation', url: '/dashboard/teleconsultation', icon: './assets/teleconsultation-blue.png' },
@@ -45,7 +45,6 @@ export class HomePage implements OnInit {
   }
   
   ngOnInit() {
-
 //     var app = angular.module('home', ['ui.bootstrap']);
 // app.controller('SearchController', function ($scope){                     
 // 	$scope.selected="";
@@ -132,6 +131,9 @@ export class HomePage implements OnInit {
   toggleSearchOption()
   {
     this.isSearchOpen = !this.isSearchOpen;
+    setTimeout(() => {
+      $("#start_date").attr("min", new Date().toISOString().split("T")[0]+"");
+    }, 250);
   }
   
   search()
@@ -139,7 +141,6 @@ export class HomePage implements OnInit {
     var searchvalue = $("#searchInput").val();
     var start_date = $("#start_date").val();
     var end_date = $("#end_date").val();
-    console.log(searchvalue,start_date,end_date);
     
     if(searchvalue=="")
     {
@@ -165,7 +166,7 @@ export class HomePage implements OnInit {
       end_date: end_date,
       type:"Teleconsultation"
     };
-    // console.log(param);
+    console.log(param);
     this._api.search(param).subscribe((res: any) => {
       console.log("search response");
       console.log(res);
@@ -184,9 +185,6 @@ export class HomePage implements OnInit {
   onStartDateChange()
   {
     var start_date = $("#start_date").val();
-    console.log("onStartDateChange",start_date);
     $("#end_date").attr("min",start_date+"");
-    
   }
-  
 }

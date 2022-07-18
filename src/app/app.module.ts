@@ -14,6 +14,7 @@ import { CommonService } from './services/common/common.service';
 import { LoginService } from './services/login/login.service';
 import { Geolocation } from '@awesome-cordova-plugins/geolocation/ngx';
 import { NgxTypeaheadModule } from 'ngx-typeahead';
+import { InAppBrowser } from '@ionic-native/in-app-browser/ngx';
 
 @NgModule({
   declarations: [AppComponent],
@@ -31,7 +32,8 @@ import { NgxTypeaheadModule } from 'ngx-typeahead';
     CommonService,
     ApiService,
     LoginService,
-    Geolocation
+    Geolocation,
+    InAppBrowser
   ],
   bootstrap: [AppComponent],
   schemas:[NO_ERRORS_SCHEMA]

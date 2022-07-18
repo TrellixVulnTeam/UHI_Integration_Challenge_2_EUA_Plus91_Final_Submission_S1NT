@@ -292,12 +292,28 @@
         _createClass(_AppComponent, [{
           key: "initializeApp",
           value: function initializeApp() {
+            var _this = this;
+
             /* To make sure we provide the fastest app loading experience
                for our users, hide the splash screen automatically
                when the app is ready to be used:
                      https://capacitor.ionicframework.com/docs/apis/splash-screen#hiding-the-splash-screen
             */
             _capacitor_splash_screen__WEBPACK_IMPORTED_MODULE_0__.SplashScreen.hide();
+
+            this._commonService.SOCKET.on('on_search', function (data) {
+              console.log("Socket Triggered: on_search", data); // this._commonService.transaction_id= data.context.transaction_id;
+            });
+
+            this._commonService.SOCKET.on('on_confirm', function (data) {
+              console.log("Socket Triggered: on_confirm", data);
+              _this._commonService.searchResults.confirm = data;
+            });
+
+            this._commonService.SOCKET.on('on_init', function (data) {
+              console.log("Socket Triggered: on_init", data);
+              _this._commonService.searchResults.order = data;
+            });
           }
         }]);
 
@@ -399,7 +415,7 @@
       /* harmony import */
 
 
-      var _angular_common_http__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(
+      var _angular_common_http__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(
       /*! @angular/common/http */
       91841);
       /* harmony import */
@@ -411,19 +427,19 @@
       /* harmony import */
 
 
-      var _angular_platform_browser__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(
+      var _angular_platform_browser__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(
       /*! @angular/platform-browser */
       39075);
       /* harmony import */
 
 
-      var _angular_router__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(
+      var _angular_router__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(
       /*! @angular/router */
       39895);
       /* harmony import */
 
 
-      var _ionic_angular__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(
+      var _ionic_angular__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(
       /*! @ionic/angular */
       80476);
       /* harmony import */
@@ -465,13 +481,19 @@
       /* harmony import */
 
 
-      var ngx_typeahead__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(
+      var ngx_typeahead__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(
       /*! ngx-typeahead */
       46541);
       /* harmony import */
 
 
-      var _angular_core__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(
+      var _ionic_native_in_app_browser_ngx__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(
+      /*! @ionic-native/in-app-browser/ngx */
+      53760);
+      /* harmony import */
+
+
+      var _angular_core__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(
       /*! @angular/core */
       37716);
 
@@ -483,26 +505,26 @@
         return new (t || _AppModule)();
       };
 
-      _AppModule.ɵmod = /*@__PURE__*/_angular_core__WEBPACK_IMPORTED_MODULE_7__["ɵɵdefineNgModule"]({
+      _AppModule.ɵmod = /*@__PURE__*/_angular_core__WEBPACK_IMPORTED_MODULE_8__["ɵɵdefineNgModule"]({
         type: _AppModule,
         bootstrap: [_app_component__WEBPACK_IMPORTED_MODULE_2__.AppComponent]
       });
-      _AppModule.ɵinj = /*@__PURE__*/_angular_core__WEBPACK_IMPORTED_MODULE_7__["ɵɵdefineInjector"]({
+      _AppModule.ɵinj = /*@__PURE__*/_angular_core__WEBPACK_IMPORTED_MODULE_8__["ɵɵdefineInjector"]({
         providers: [{
-          provide: _angular_router__WEBPACK_IMPORTED_MODULE_8__.RouteReuseStrategy,
-          useClass: _ionic_angular__WEBPACK_IMPORTED_MODULE_9__.IonicRouteStrategy
+          provide: _angular_router__WEBPACK_IMPORTED_MODULE_9__.RouteReuseStrategy,
+          useClass: _ionic_angular__WEBPACK_IMPORTED_MODULE_10__.IonicRouteStrategy
         }, {
-          provide: _angular_common_http__WEBPACK_IMPORTED_MODULE_10__.HTTP_INTERCEPTORS,
+          provide: _angular_common_http__WEBPACK_IMPORTED_MODULE_11__.HTTP_INTERCEPTORS,
           useClass: _interceptors_service__WEBPACK_IMPORTED_MODULE_0__.HttpConfigInterceptor,
           multi: true
-        }, _services_common_common_service__WEBPACK_IMPORTED_MODULE_4__.CommonService, _services_api_api_service__WEBPACK_IMPORTED_MODULE_3__.ApiService, _services_login_login_service__WEBPACK_IMPORTED_MODULE_5__.LoginService, _awesome_cordova_plugins_geolocation_ngx__WEBPACK_IMPORTED_MODULE_6__.Geolocation],
-        imports: [[_angular_platform_browser__WEBPACK_IMPORTED_MODULE_11__.BrowserModule, _ionic_angular__WEBPACK_IMPORTED_MODULE_9__.IonicModule.forRoot(), _app_routing_module__WEBPACK_IMPORTED_MODULE_1__.AppRoutingModule, _angular_common_http__WEBPACK_IMPORTED_MODULE_10__.HttpClientModule, ngx_typeahead__WEBPACK_IMPORTED_MODULE_12__.NgxTypeaheadModule]]
+        }, _services_common_common_service__WEBPACK_IMPORTED_MODULE_4__.CommonService, _services_api_api_service__WEBPACK_IMPORTED_MODULE_3__.ApiService, _services_login_login_service__WEBPACK_IMPORTED_MODULE_5__.LoginService, _awesome_cordova_plugins_geolocation_ngx__WEBPACK_IMPORTED_MODULE_6__.Geolocation, _ionic_native_in_app_browser_ngx__WEBPACK_IMPORTED_MODULE_7__.InAppBrowser],
+        imports: [[_angular_platform_browser__WEBPACK_IMPORTED_MODULE_12__.BrowserModule, _ionic_angular__WEBPACK_IMPORTED_MODULE_10__.IonicModule.forRoot(), _app_routing_module__WEBPACK_IMPORTED_MODULE_1__.AppRoutingModule, _angular_common_http__WEBPACK_IMPORTED_MODULE_11__.HttpClientModule, ngx_typeahead__WEBPACK_IMPORTED_MODULE_13__.NgxTypeaheadModule]]
       });
 
       (function () {
-        (typeof ngJitMode === "undefined" || ngJitMode) && _angular_core__WEBPACK_IMPORTED_MODULE_7__["ɵɵsetNgModuleScope"](_AppModule, {
+        (typeof ngJitMode === "undefined" || ngJitMode) && _angular_core__WEBPACK_IMPORTED_MODULE_8__["ɵɵsetNgModuleScope"](_AppModule, {
           declarations: [_app_component__WEBPACK_IMPORTED_MODULE_2__.AppComponent],
-          imports: [_angular_platform_browser__WEBPACK_IMPORTED_MODULE_11__.BrowserModule, _ionic_angular__WEBPACK_IMPORTED_MODULE_9__.IonicModule, _app_routing_module__WEBPACK_IMPORTED_MODULE_1__.AppRoutingModule, _angular_common_http__WEBPACK_IMPORTED_MODULE_10__.HttpClientModule, ngx_typeahead__WEBPACK_IMPORTED_MODULE_12__.NgxTypeaheadModule]
+          imports: [_angular_platform_browser__WEBPACK_IMPORTED_MODULE_12__.BrowserModule, _ionic_angular__WEBPACK_IMPORTED_MODULE_10__.IonicModule, _app_routing_module__WEBPACK_IMPORTED_MODULE_1__.AppRoutingModule, _angular_common_http__WEBPACK_IMPORTED_MODULE_11__.HttpClientModule, ngx_typeahead__WEBPACK_IMPORTED_MODULE_13__.NgxTypeaheadModule]
         });
       })();
       /***/
@@ -767,37 +789,35 @@
 
       var _CommonService = /*#__PURE__*/function () {
         function _CommonService(_loadingController, _toastController, _geolocation) {
-          var _this = this;
-
           _classCallCheck(this, _CommonService);
 
+          // this.searchResults.fulfillments = {};
+          // this.SOCKET.on('on_search', (data) => {
+          //   console.log("Socket Triggered: on_search", data);
+          //   this.contextData = data.context;
+          //   console.log(this.contextData);
+          // });
+          // this.SOCKET.on('on_confirm', (data) => {
+          //   this.searchResults.confirm = data;
+          //   console.log("Socket Triggered: on_confirm", data);
+          // });
+          // this.SOCKET.on('on_init', (data) => {
+          //   this.searchResults.order = data;
+          //   console.log("Socket Triggered: on_init", data);
+          // });
+          // this.SOCKET.on('on_select', (data) => {
+          //   console.log("Socket Triggered: on_select", data);
+          // });
+          // this.SOCKET.on('on_status', (data) => {
+          //   console.log("Socket Triggered: on_status", data);
+          // });
           this._loadingController = _loadingController;
           this._toastController = _toastController;
           this._geolocation = _geolocation;
           this.SOCKET = _environments_environment__WEBPACK_IMPORTED_MODULE_0__.environment.SOCKET;
           /* Global Variables */
 
-          this.searchResults = {};
-          this.searchResults.fulfillments = {}; // this.SOCKET.on('on_search', (data) => {
-          //   console.log("Socket Triggered: on_search", data);
-          //   this.contextData = data.context;
-          //   console.log(this.contextData);
-          // });
-
-          this.SOCKET.on('on_confirm', function (data) {
-            _this.searchResults.confirm = data;
-            console.log("Socket Triggered: on_confirm", data);
-          });
-          this.SOCKET.on('on_init', function (data) {
-            _this.searchResults.order = data;
-            console.log("Socket Triggered: on_init", data);
-          }); // this.SOCKET.on('on_select', (data) => {
-          //   console.log("Socket Triggered: on_select", data);
-          // });
-          // this.SOCKET.on('on_status', (data) => {
-          //   console.log("Socket Triggered: on_status", data);
-          // });
-          // this.SOCKET.on('on_search', (data) => {
+          this.searchResults = {}; // this.SOCKET.on('on_search', (data) => {
           //   console.log("Socket Triggered: on_search", data);
           //   this.transaction_id= data.context.transaction_id;
           // });
@@ -1005,16 +1025,15 @@
 
       var socket_io_client__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(
       /*! socket.io-client */
-      43289); // This file can be replaced during build by using the `fileReplacements` array.
-      // `ng build --prod` replaces `environment.ts` with `environment.prod.ts`.
-      // The list of file replacements can be found in `angular.json`.
-
+      43289);
 
       var _environment = {
         production: false,
-        API: 'https://7aa3-112-133-244-202.in.ngrok.io/api/v1/',
-        // API: 'http://uhi-eua-server.medixcel.in:3284/api/v1/',
-        SOCKET: socket_io_client__WEBPACK_IMPORTED_MODULE_0__.connect('http://uhi-eua-socket.medixcel.in:3285')
+        // API: 'https://c32f-2409-4042-4b00-ade3-b757-3bf1-ff61-d120.in.ngrok.io/api/v1/',
+        API: 'http://uhi-eua-server.medixcel.in:3284/api/v1/',
+        // SOCKET: io('http://uhi-eua-socket.medixcel.in:3285')
+        SOCKET: (0, socket_io_client__WEBPACK_IMPORTED_MODULE_0__.io)('https://f545-182-72-250-90.in.ngrok.io') // io.connect()
+
       };
       /*
        * For easier debugging in development mode, you can import the following file

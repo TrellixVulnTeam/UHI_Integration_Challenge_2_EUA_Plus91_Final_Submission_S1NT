@@ -195,6 +195,12 @@
       /* harmony import */
 
 
+      var tslib__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(
+      /*! tslib */
+      64762);
+      /* harmony import */
+
+
       var src_app_services_api_api_service__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(
       /*! src/app/services/api/api.service */
       45146);
@@ -213,19 +219,19 @@
       /* harmony import */
 
 
-      var _angular_router__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(
+      var _angular_router__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(
       /*! @angular/router */
       39895);
       /* harmony import */
 
 
-      var _ionic_angular__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(
+      var _ionic_angular__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(
       /*! @ionic/angular */
       80476);
       /* harmony import */
 
 
-      var _angular_common__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(
+      var _angular_common__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(
       /*! @angular/common */
       38583);
 
@@ -411,9 +417,14 @@
           this._router = _router;
           this._api = _api;
           this._commonService = _commonService;
+          this.isSocketTrigger = false;
+
+          if (!this._commonService.searchResults.hasOwnProperty("fulfillments")) {
+            this._commonService.searchResults.fulfillments = [];
+          }
 
           if (this._commonService.transaction_id == null || this._commonService.transaction_id == undefined) {
-            this._commonService.transaction_id = "cc4c1bbc-8f76-4b15-aeb5-1401be1fe1ec"; // this._router.navigate(["/dashboard/"]);
+            this._router.navigate(["/dashboard/"]);
           }
         }
 
@@ -422,170 +433,79 @@
           value: function ngOnInit() {
             var _this = this;
 
-            this.get_onSearchData(); // this.getdataTest();
+            setTimeout(function () {
+              _this.get_onSearchData();
+            }, 500);
 
             this._commonService.SOCKET.on('on_search', function (data) {
-              _this.get_onSearchData();
+              _this.isSocketTrigger = true;
             });
           }
         }, {
-          key: "getdataTest",
-          value: function getdataTest(res) {
+          key: "sortData",
+          value: function sortData(res) {
             var _this2 = this;
 
-            // var res = {
-            //   "context": {
-            //     "domain": "NA",
-            //     "country": "IND",
-            //     "city": "PUNE",
-            //     "action": "search",
-            //     "core_version": "NA",
-            //     "message_id": "104ab729-47e9-4f43-a6d5-10ccf5cf7cc1",
-            //     "transaction_id": "7fbbac2e-0a94-4676-8b5a-7cf6143533c9",
-            //     "timestamp": "2022-07-16T12:12:59.000000",
-            //     "provider_id": "plus91-HSPA",
-            //     "provider_uri": "https://ec3c-182-72-250-90.ngrok.io"
-            //   },
-            //   "message": {
-            //     "catalog": {
-            //       "descriptor": {
-            //         "name": "Korle-Bu Teaching Hospital- Polyclinic"
-            //       },
-            //       "items": [
-            //         {
-            //           "id": "1726",
-            //           "descriptor": {
-            //             "name": "Test the x ray radiology"
-            //           },
-            //           "price": {
-            //             "currency": "INR",
-            //             "value": "23.00"
-            //           },
-            //           "fulfillment_id": "863"
-            //         },
-            //         {
-            //           "id": "1726",
-            //           "descriptor": {
-            //             "name": "Test the x ray radiology"
-            //           },
-            //           "price": {
-            //             "currency": "INR",
-            //             "value": "23.00"
-            //           },
-            //           "fulfillment_id": "879"
-            //         }
-            //       ],
-            //       "fulfillments": [
-            //         {
-            //           "id": "863",
-            //           "type": "X ray",
-            //           "agent": {
-            //             "id": "863",
-            //             "name": "Dr TNA Archampong",
-            //             "gender": "M",
-            //             "tags": {
-            //               "@abdm/gov/in/first_consultation": "23.00",
-            //               "@abdm/gov/in/upi_id": "9999999999@okhdfc",
-            //               "@abdm/gov/in/follow_up": null,
-            //               "@abdm/gov/in/experience": null,
-            //               "@abdm/gov/in/languages": "Eng, Hin",
-            //               "@abdm/gov/in/speciality": "Radiology",
-            //               "@abdm/gov/in/lab_report_consultation": null,
-            //               "@abdm/gov/in/education": null,
-            //               "@abdm/gov/in/hpr_id": null,
-            //               "@abdm/gov/in/signature": null
-            //             }
-            //           },
-            //           "start": {
-            //             "time": {
-            //               "timestamp": "T18:30+00:00"
-            //             }
-            //           },
-            //           "end": {
-            //             "time": {
-            //               "timestamp": "T18:10+00:00"
-            //             }
-            //           }
-            //         },
-            //         {
-            //           "id": "879",
-            //           "type": "X ray",
-            //           "agent": {
-            //             "id": "879",
-            //             "name": "Prof JH Addy",
-            //             "gender": "M",
-            //             "tags": {
-            //               "@abdm/gov/in/first_consultation": "23.00",
-            //               "@abdm/gov/in/upi_id": "9999999999@okhdfc",
-            //               "@abdm/gov/in/follow_up": null,
-            //               "@abdm/gov/in/experience": null,
-            //               "@abdm/gov/in/languages": "Eng, Hin",
-            //               "@abdm/gov/in/speciality": "Radiology",
-            //               "@abdm/gov/in/lab_report_consultation": null,
-            //               "@abdm/gov/in/education": null,
-            //               "@abdm/gov/in/hpr_id": null,
-            //               "@abdm/gov/in/signature": null
-            //             }
-            //           },
-            //           "start": {
-            //             "time": {
-            //               "timestamp": "T18:30+00:00"
-            //             }
-            //           },
-            //           "end": {
-            //             "time": {
-            //               "timestamp": "T18:10+00:00"
-            //             }
-            //           }
-            //         }
-            //       ]
-            //     }
-            //   },
-            //   "status_code": 200
-            // }
             if (res.status_code == 200) {
               if (res.hasOwnProperty("context") && res.hasOwnProperty("message") && res.message.hasOwnProperty("catalog")) {
                 if (res.message.catalog.hasOwnProperty("fulfillments")) {
-                  if (!this._commonService.searchResults.hasOwnProperty("fulfillments")) {
-                    this._commonService.searchResults.fulfillments = [];
-                  }
-
                   res.message.catalog.fulfillments.forEach(function (fulfillment) {
-                    res.message.catalog.items.forEach(function (item) {
-                      if (parseInt(fulfillment.id) == parseInt(item.fulfillment_id)) {
-                        var fulfillmentObj = fulfillment;
-                        fulfillmentObj["items"] = item;
-                        fulfillmentObj["context"] = res.context;
+                    return (0, tslib__WEBPACK_IMPORTED_MODULE_3__.__awaiter)(_this2, void 0, void 0, /*#__PURE__*/regeneratorRuntime.mark(function _callee() {
+                      var _this3 = this;
 
-                        _this2._commonService.searchResults.fulfillments.push(fulfillmentObj);
-                      }
-                    });
+                      return regeneratorRuntime.wrap(function _callee$(_context) {
+                        while (1) {
+                          switch (_context.prev = _context.next) {
+                            case 0:
+                              res.message.catalog.items.forEach(function (item) {
+                                if (parseInt(fulfillment.id) == parseInt(item.fulfillment_id)) {
+                                  var fulfillmentObj = fulfillment;
+                                  fulfillmentObj["items"] = item;
+                                  fulfillmentObj["context"] = res.context;
+                                  var tempArr = JSON.stringify(fulfillmentObj);
+
+                                  _this3._commonService.searchResults.fulfillments.push(JSON.parse(tempArr));
+                                }
+                              });
+
+                            case 1:
+                            case "end":
+                              return _context.stop();
+                          }
+                        }
+                      }, _callee);
+                    }));
                   });
+
+                  if (this.isSocketTrigger) {
+                    this.isSocketTrigger = false;
+                    this.get_onSearchData();
+                  }
                 }
               }
-
-              console.log(this._commonService.searchResults.fulfillments);
             }
+
+            console.log("fulfillments count -> ", this._commonService.searchResults.fulfillments.length);
           }
         }, {
           key: "get_onSearchData",
           value: function get_onSearchData() {
-            var _this3 = this;
+            var _this4 = this;
 
             var param = {
               "transaction_id": this._commonService.transaction_id
-            }; // console.log(param);
+            };
+
+            this._commonService.presentLoading(2000);
 
             this._api.get_onSearchData(param).subscribe(function (res) {
-              console.log("get_onSearchData res"); // console.log(res);
+              _this4._commonService.searchResults.fulfillments = []; // this._commonService.presentLoading(3000);
 
-              _this3._commonService.searchResults = [];
               res.data.forEach(function (data) {
                 if (data.hasOwnProperty("request_body")) {
                   var results = JSON.parse(data.request_body);
-                  console.log(results);
 
-                  _this3.getdataTest(results);
+                  _this4.sortData(results);
                   /*if(results.status_code==200 && results.hasOwnProperty("context") && results.hasOwnProperty("message") && results.message.hasOwnProperty("catalog"))
                   {
                     // (results.message.catalog.providers).forEach(provider => {
@@ -686,7 +606,7 @@
       }();
 
       _SearchResultsPage.ɵfac = function SearchResultsPage_Factory(t) {
-        return new (t || _SearchResultsPage)(_angular_core__WEBPACK_IMPORTED_MODULE_2__["ɵɵdirectiveInject"](_angular_router__WEBPACK_IMPORTED_MODULE_3__.Router), _angular_core__WEBPACK_IMPORTED_MODULE_2__["ɵɵdirectiveInject"](src_app_services_api_api_service__WEBPACK_IMPORTED_MODULE_0__.ApiService), _angular_core__WEBPACK_IMPORTED_MODULE_2__["ɵɵdirectiveInject"](src_app_services_common_common_service__WEBPACK_IMPORTED_MODULE_1__.CommonService));
+        return new (t || _SearchResultsPage)(_angular_core__WEBPACK_IMPORTED_MODULE_2__["ɵɵdirectiveInject"](_angular_router__WEBPACK_IMPORTED_MODULE_4__.Router), _angular_core__WEBPACK_IMPORTED_MODULE_2__["ɵɵdirectiveInject"](src_app_services_api_api_service__WEBPACK_IMPORTED_MODULE_0__.ApiService), _angular_core__WEBPACK_IMPORTED_MODULE_2__["ɵɵdirectiveInject"](src_app_services_common_common_service__WEBPACK_IMPORTED_MODULE_1__.CommonService));
       };
 
       _SearchResultsPage.ɵcmp = /*@__PURE__*/_angular_core__WEBPACK_IMPORTED_MODULE_2__["ɵɵdefineComponent"]({
@@ -752,7 +672,7 @@
             _angular_core__WEBPACK_IMPORTED_MODULE_2__["ɵɵproperty"]("ngIf", ctx._commonService.searchResults.fulfillments.length > 0);
           }
         },
-        directives: [_ionic_angular__WEBPACK_IMPORTED_MODULE_4__.IonHeader, _ionic_angular__WEBPACK_IMPORTED_MODULE_4__.IonToolbar, _ionic_angular__WEBPACK_IMPORTED_MODULE_4__.IonButtons, _ionic_angular__WEBPACK_IMPORTED_MODULE_4__.IonMenuButton, _ionic_angular__WEBPACK_IMPORTED_MODULE_4__.IonTitle, _ionic_angular__WEBPACK_IMPORTED_MODULE_4__.IonBackButton, _ionic_angular__WEBPACK_IMPORTED_MODULE_4__.IonBackButtonDelegate, _ionic_angular__WEBPACK_IMPORTED_MODULE_4__.IonContent, _angular_common__WEBPACK_IMPORTED_MODULE_5__.NgIf, _angular_common__WEBPACK_IMPORTED_MODULE_5__.NgForOf, _ionic_angular__WEBPACK_IMPORTED_MODULE_4__.IonCard, _ionic_angular__WEBPACK_IMPORTED_MODULE_4__.IonItem, _ionic_angular__WEBPACK_IMPORTED_MODULE_4__.IonLabel, _ionic_angular__WEBPACK_IMPORTED_MODULE_4__.IonCardSubtitle, _ionic_angular__WEBPACK_IMPORTED_MODULE_4__.IonCardContent, _ionic_angular__WEBPACK_IMPORTED_MODULE_4__.IonChip],
+        directives: [_ionic_angular__WEBPACK_IMPORTED_MODULE_5__.IonHeader, _ionic_angular__WEBPACK_IMPORTED_MODULE_5__.IonToolbar, _ionic_angular__WEBPACK_IMPORTED_MODULE_5__.IonButtons, _ionic_angular__WEBPACK_IMPORTED_MODULE_5__.IonMenuButton, _ionic_angular__WEBPACK_IMPORTED_MODULE_5__.IonTitle, _ionic_angular__WEBPACK_IMPORTED_MODULE_5__.IonBackButton, _ionic_angular__WEBPACK_IMPORTED_MODULE_5__.IonBackButtonDelegate, _ionic_angular__WEBPACK_IMPORTED_MODULE_5__.IonContent, _angular_common__WEBPACK_IMPORTED_MODULE_6__.NgIf, _angular_common__WEBPACK_IMPORTED_MODULE_6__.NgForOf, _ionic_angular__WEBPACK_IMPORTED_MODULE_5__.IonCard, _ionic_angular__WEBPACK_IMPORTED_MODULE_5__.IonItem, _ionic_angular__WEBPACK_IMPORTED_MODULE_5__.IonLabel, _ionic_angular__WEBPACK_IMPORTED_MODULE_5__.IonCardSubtitle, _ionic_angular__WEBPACK_IMPORTED_MODULE_5__.IonCardContent, _ionic_angular__WEBPACK_IMPORTED_MODULE_5__.IonChip],
         styles: ["\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6IiIsImZpbGUiOiJzZWFyY2gtcmVzdWx0cy5wYWdlLnNjc3MifQ== */"]
       });
       /***/

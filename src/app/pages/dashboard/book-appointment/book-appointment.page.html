@@ -38,7 +38,7 @@
       </div>
       <ion-label>
         {{ this._commonService.searchResults.fulfillments[this.search_index].agent.name }}<br>
-        <span class="text-muted">{{ this._commonService.searchResults.fulfillments[this.search_index].type }} {{this._commonService.searchResults.fulfillments[this.search_index].agent.tags["@abdm/gov/in/speciality"]}} {{this._commonService.searchResults.fulfillments[this.search_index].agent.tags["@abdm/gov/in/education"]?"/"+this._commonService.searchResults.fulfillments[this.search_index].agent.tags["@abdm/gov/in/education"]:""}}</span><br>
+        <span class="text-muted">{{ this._commonService.searchResults.fulfillments[this.search_index].type }} / {{this._commonService.searchResults.fulfillments[this.search_index].items.descriptor.name}} {{this._commonService.searchResults.fulfillments[this.search_index].agent.tags["@abdm/gov/in/education"]?"/"+this._commonService.searchResults.fulfillments[this.search_index].agent.tags["@abdm/gov/in/education"]:""}}</span><br>
         <span style="color: #3880ff;"><b>{{this._commonService.searchResults.fulfillments[this.search_index].agent.tags["@abdm/gov/in/hpr_id"]}}</b></span><br *ngIf="this._commonService.searchResults.fulfillments[this.search_index].agent.tags['@abdm/gov/in/hpr_id']">
         <ion-card-subtitle>{{this._commonService.searchResults.fulfillments[this.search_index].agent.tags["@abdm/gov/in/languages"]}}<br>{{this._commonService.searchResults.fulfillments[this.search_index].agent.tags["@abdm/gov/in/experience"]}}</ion-card-subtitle>
       </ion-label>

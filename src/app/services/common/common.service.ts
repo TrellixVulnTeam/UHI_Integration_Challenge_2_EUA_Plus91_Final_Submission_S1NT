@@ -22,20 +22,20 @@ export class CommonService {
     public _toastController: ToastController,
     public _geolocation: Geolocation
   ) {
-    this.searchResults.fulfillments = {};
+    // this.searchResults.fulfillments = {};
     // this.SOCKET.on('on_search', (data) => {
     //   console.log("Socket Triggered: on_search", data);
     //   this.contextData = data.context;
     //   console.log(this.contextData);
     // });
-    this.SOCKET.on('on_confirm', (data) => {
-      this.searchResults.confirm = data;
-      console.log("Socket Triggered: on_confirm", data);
-    });
-    this.SOCKET.on('on_init', (data) => {
-      this.searchResults.order = data;
-      console.log("Socket Triggered: on_init", data);
-    });
+    // this.SOCKET.on('on_confirm', (data) => {
+    //   this.searchResults.confirm = data;
+    //   console.log("Socket Triggered: on_confirm", data);
+    // });
+    // this.SOCKET.on('on_init', (data) => {
+    //   this.searchResults.order = data;
+    //   console.log("Socket Triggered: on_init", data);
+    // });
     // this.SOCKET.on('on_select', (data) => {
     //   console.log("Socket Triggered: on_select", data);
     // });

@@ -19,7 +19,7 @@
         </div>
         <ion-label>
           {{ this._commonService.searchResults.fulfillments[this.search_index].agent.name }}<br>
-          <span class="text-muted">{{ this._commonService.searchResults.fulfillments[this.search_index].type }} {{this._commonService.searchResults.fulfillments[this.search_index].agent.tags["@abdm/gov/in/speciality"]}} {{this._commonService.searchResults.fulfillments[this.search_index].agent.tags["@abdm/gov/in/education"]?"/"+this._commonService.searchResults.fulfillments[this.search_index].agent.tags["@abdm/gov/in/education"]:""}}</span><br>
+          <span class="text-muted">{{ this._commonService.searchResults.fulfillments[this.search_index].type }} / {{this._commonService.searchResults.fulfillments[this.search_index].items.descriptor.name}} {{this._commonService.searchResults.fulfillments[this.search_index].agent.tags["@abdm/gov/in/education"]?"/"+this._commonService.searchResults.fulfillments[this.search_index].agent.tags["@abdm/gov/in/education"]:""}}</span><br>
           <span style="color: #3880ff;"><b>{{this._commonService.searchResults.fulfillments[this.search_index].agent.tags["@abdm/gov/in/hpr_id"]}}</b></span><br *ngIf="this._commonService.searchResults.fulfillments[this.search_index].agent.tags['@abdm/gov/in/hpr_id']">
           <ion-card-subtitle>{{this._commonService.searchResults.fulfillments[this.search_index].agent.tags["@abdm/gov/in/languages"]}}<br>{{this._commonService.searchResults.fulfillments[this.search_index].agent.tags["@abdm/gov/in/experience"]}}</ion-card-subtitle>
         </ion-label>
@@ -28,14 +28,14 @@
 
     <div class="w-100 d-block">
       <span class="text-muted d-block fs-12">Selected date and time for Teleconsultation</span>
-      <span class="d-block">Sunday Jul 17, 5pm </span>
+      <span class="d-block">{{blooked_slot}}</span>
     </div>
 
-    <div class="w-100 d-block mt-5">
+    <div class="w-100 d-block mt-5" *ngIf="_commonService.searchResults.order">
       <div class="mb-2">
         <span style="font-weight: 700;">Billing Details</span>
       </div>
-      <div class="d-flex justify-content-between">
+      <!-- <div class="d-flex justify-content-between">
         <span class="text-muted fs-14">Consultation Fees</span>
         <span>900</span>
       </div>
@@ -50,11 +50,16 @@
       <div class="d-flex justify-content-between">
         <span class="text-muted fs-14">Registration Fees</span>
         <span>400</span>
+      </div> -->
+
+      <div class="d-flex justify-content-between" *ngFor="let quote of _commonService.searchResults.order.message.order.quote.quote.breakup">
+        <span class="text-muted fs-14">{{quote.title}}</span>
+        <span>{{quote.price.value}}</span>
       </div>
       <hr>
       <div class="d-flex justify-content-between" style="font-weight: 700;">
         <span class="fs-14 text-primary">Total Payable</span>
-        <span class="text-primary">Rs. 1500</span>
+        <span class="text-primary">Rs. {{_commonService.searchResults.order.message.order.quote.quote.price.value}}</span>
       </div>
     </div>
 

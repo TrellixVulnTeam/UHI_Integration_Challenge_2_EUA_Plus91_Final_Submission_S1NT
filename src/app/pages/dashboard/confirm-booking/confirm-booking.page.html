@@ -13,37 +13,42 @@
 <ion-content [fullscreen]="true">
   <div class="container-fluid w-100 h-100 p-3">
     <div class="w-100 d-block">
-
+      
       <div class="d-flex justify-content-center w-100">
         <div class="d-flex align-items-center">
           <ion-icon color="success" class="fs-20" name="checkbox"></ion-icon>
           <span class="fs-18 ms-2" style="color: var(--ion-color-success, #2dd36f);font-weight: 700;">Appointment Status - Confirmed</span>
         </div>
       </div>
-
+      
       <div class="w-100 text-center mt-2">
         <span class="text-muted fs-14">Your teleconsultation appointment is confirmed!</span>
       </div>
-
-      <!-- <ion-card *ngFor="let doctor of this._commonService.searchResults.fulfillments[this.search_index]">
-        <ion-item class="border-0" lines="none">
-          <div class="h-100" style="padding-top: 5px;padding-bottom: 5px;">
-            <img [src]="doctor.agent.gender=='male'?'assets/male-doctor.png':'assets/female-doctor.png'" alt="" style="width: 60px;margin: 5px 15px 5px 0px;border-radius: 100%;">
-          </div>
-          <ion-label>
-            {{doctor.agent.name}}<br>
-            <span class="text-muted">Radiology{{doctor.doctor_service_type}}</span><br>
-            <span style="color: #3880ff;"><b>doctor.hrp@hpr.abdm</b></span><br>
-            <ion-card-subtitle class="mt-2">Marathi / Hindi / English<br>12 Yrs of Experience</ion-card-subtitle>
-          </ion-label>
-        </ion-item>
-        <ion-card-content class="m-0 p-2">
-          <div class="d-flex flex-wrap justify-content-start">
-            <span style="color: red; font-size: 18px; font-weight: 800;margin-left: 15px;">{{doctor.quote.price.value}}/-<span style="font-size: 12px; font-weight:600;margin-left: 10px;color: var(--ion-color-primary);">Medixcel</span></span>
-          </div>
-        </ion-card-content>
-      </ion-card> -->
-
+      
+      <div *ngIf="_commonService.searchResults.confirm">
+        
+        <ion-card class="m-0 p-0 mt-4">
+          <ion-item class="border-0" lines="none">
+            <div class="h-100" style="padding-top: 5px;padding-bottom: 5px;">
+              <img [src]="_commonService.searchResults.confirm.message.order.fulfillment.agent.gender=='male'?'assets/male-doctor.png':'assets/female-doctor.png'" alt="" style="width: 60px;margin: 5px 15px 5px 0px;border-radius: 100%;">
+            </div>
+            <ion-label>
+              {{_commonService.searchResults.confirm.message.order.fulfillment.agent.name}}<br>
+              <span class="text-muted fs-14">{{ _commonService.searchResults.confirm.message.order.fulfillment.type }} / {{_commonService.searchResults.confirm.message.order.item.descriptor.name}} {{_commonService.searchResults.confirm.message.order.fulfillment.agent.tags["@abdm/gov/in/education"]?"/"+_commonService.searchResults.confirm.message.order.fulfillment.agent.tags["@abdm/gov/in/education"]:""}}</span><br>
+              <span style="color: #3880ff;"><b>{{_commonService.searchResults.confirm.message.order.fulfillment.agent.tags["@abdm/gov/in/hpr_id"]}}</b></span><br *ngIf="_commonService.searchResults.confirm.message.order.fulfillment.agent.tags['@abdm/gov/in/hpr_id']">
+              <ion-card-subtitle>{{_commonService.searchResults.confirm.message.order.fulfillment.agent.tags["@abdm/gov/in/languages"]}}<br>{{_commonService.searchResults.confirm.message.order.fulfillment.agent.tags["@abdm/gov/in/experience"]}}</ion-card-subtitle>
+            </ion-label>
+          </ion-item>
+          <ion-card-content class="m-0 p-2">
+            <div class="d-flex flex-wrap justify-content-between">
+              <ion-button style="color: #3880ff;font-size: 12px;" fill="" (click)="openBrowser(_commonService.searchResults.confirm.message.order.fulfillment.tags['@abdm/gov/in/teleconf_url'])"><ion-icon color="primary" slot="start" name="videocam"></ion-icon>Video Call</ion-button>
+              <ion-button style="color: #3880ff;font-size: 12px;" fill=""><ion-icon color="primary" slot="start" name="call"></ion-icon>Reschedule</ion-button>
+              <ion-button style="color: #3880ff;font-size: 12px;" fill=""><ion-icon color="primary" slot="start" name="chatbubble-ellipses"></ion-icon>Chat</ion-button>
+            </div>
+          </ion-card-content>
+        </ion-card>
+      </div>
+      
     </div>
   </div>
 </ion-content>

@@ -292,7 +292,6 @@
           var date = new Date();
           this.slot_date_option = this.monthNames[date.getMonth()] + " " + date.getDate();
           this.search_index = parseInt(this.activatedRoute.snapshot.paramMap.get('id'));
-          console.log(this.search_index);
 
           if (this._commonService.transaction_id == null || this._commonService.transaction_id == undefined) {
             this._router.navigate(["/dashboard/search-results"]);
@@ -393,181 +392,177 @@
             } // console.log(this.availableTimeSlots);
             // return times;
 
-          }
-        }, {
-          key: "get_onSearchData",
-          value: function get_onSearchData() {
-            var _this = this;
+          } // get_onSearchData()
+          // {
+          //   let param = {
+          //     "transaction_id": this._commonService.transaction_id
+          //   }
+          //   // console.log("get_onSearchData",param);
+          //   this._api.get_onSearchData(param).subscribe((res: any) => {
+          //     // console.log("get_onSearchData res");
+          //     // console.log(res);
+          //     this.searchResults = [];
+          //     res.data.forEach(data => {
+          //       if(data.hasOwnProperty("request_body"))
+          //       {
+          //         var results = JSON.parse(data.request_body);
+          //         console.log(results);
+          //         if(results.status_code==200 && results.hasOwnProperty("context") && results.hasOwnProperty("message") && results.message.hasOwnProperty("catalog") && results.message.catalog.hasOwnProperty("providers") && (results.message.catalog.providers).length>0)
+          //         {
+          //           (results.message.catalog.providers).forEach(provider => {
+          //             provider.fulfillments.forEach(fulfillment => {
+          //               var isDoctorAlreadyAdded = false;
+          //               for(var i=0; i<(this.searchResults).length;i++)
+          //               {
+          //                 if(this.searchResults[i].doctor_id == fulfillment.person.id)
+          //                 {
+          //                   isDoctorAlreadyAdded = true;
+          //                   break;
+          //                 }
+          //               };
+          //               if(!isDoctorAlreadyAdded)
+          //               {
+          //                 var expression = /[-a-zA-Z0-9@:%._\+~#=]{1,256}\.[a-zA-Z0-9()]{1,6}\b([-a-zA-Z0-9()@:%_\+.~#?&//=]*)?/gi;
+          //                 var regex = new RegExp(expression);
+          //                 if(!fulfillment.person.image.match(regex)) {
+          //                   fulfillment.person.image = "";
+          //                 }
+          //                 this.searchResults.push({
+          //                   service_provider: results.message.catalog.descriptor.name,
+          //                   provider_id: provider.id,
+          //                   hospital_name: provider.descriptor.name,
+          //                   doctor_name: fulfillment.person.name,
+          //                   doctor_id: fulfillment.person.id,
+          //                   doctor_gender: (fulfillment.person.gender).toLowerCase(),
+          //                   doctor_img: fulfillment.person.image,
+          //                   doctor_cred: fulfillment.person.cred,
+          //                   doctor_service_type: fulfillment.type=="NA"?"":fulfillment.type,
+          //                   doctor_service_category: "",
+          //                   item_id: null,
+          //                   start_time: fulfillment.start,
+          //                   end_time: fulfillment.end
+          //                 });
+          //               }
+          //             });
+          //             provider.items.forEach(item => {
+          //               this.searchResults.forEach(doctor => {
+          //                 if(doctor.doctor_id==item.fulfillment_id)
+          //                 {
+          //                   provider.categories.forEach(category => {
+          //                     if(category.id==item.category_id)
+          //                     {
+          //                       doctor.doctor_service_category = category.descriptor.name=="NA"?"":category.descriptor.name;
+          //                       doctor.item_id = item.id;
+          //                     }
+          //                   });
+          //                 }
+          //               });
+          //             });
+          //           });
+          //         }
+          //       }
+          //     });
+          //     // console.log(this.searchResults);
+          //   }, (err) => {
+          //     if (err) {
+          //       console.error(err);
+          //     }
+          //   })
+          // }
+          // get_onSelectData()
+          // {
+          //   let param = {
+          //     "transaction_id": this._commonService.transaction_id
+          //   }
+          //   this._api.get_onSelectData(param).subscribe((res: any) => {
+          //     // console.log(res);
+          //     res.data.forEach(data => {
+          //       if(data.hasOwnProperty("request_body"))
+          //       {
+          //         var results = JSON.parse(data.request_body);
+          //         // console.log(results);
+          //         this.doctorInfo = [];
+          //         if(results.status_code==200 && results.hasOwnProperty("context") && results.hasOwnProperty("message") && results.message.hasOwnProperty("order") && results.message.order.hasOwnProperty("provider"))
+          //         {
+          //           // console.log("------------->1");
+          //           // (results.message.order.provider).forEach(providerData => {
+          //           // console.log("------------->2");
+          //           results.message.order.fulfillment.forEach(fulfillmentData => {
+          //             console.log("------------->3");
+          //             var expression = /[-a-zA-Z0-9@:%._\+~#=]{1,256}\.[a-zA-Z0-9()]{1,6}\b([-a-zA-Z0-9()@:%_\+.~#?&//=]*)?/gi;
+          //             var regex = new RegExp(expression);
+          //             // if(fulfillmentData.person.image!=null && !fulfillmentData.person.image.match(regex)) {
+          //             //   fulfillmentData.person.image = "";
+          //             // }
+          //             if(fulfillmentData.agent.image!=null && !fulfillmentData.agent.image.match(regex)) {
+          //               fulfillmentData.agent.image = "";
+          //             }
+          //             this.doctorInfo.push({
+          //               service_provider: results.message.order.provider.descriptor.name,
+          //               // provider_id: providerData,
+          //               // hospital_name: providerData, //.descriptor.name,
+          //               doctor_name: fulfillmentData.agent.name,
+          //               doctor_id: fulfillmentData.agent.id,
+          //               doctor_gender: (fulfillmentData.agent.gender).toLowerCase(),
+          //               doctor_img: fulfillmentData.agent.image,
+          //               doctor_cred: fulfillmentData.agent.cred,
+          //               doctor_service_type: fulfillmentData.type=="NA"?"":fulfillmentData.type,
+          //               doctor_service_category: "",
+          //               item_id: null,
+          //               quote: null
+          //             });
+          //           });
+          //           results.message.order.items.forEach(item => {
+          //             this.doctorInfo.forEach(doctor => {
+          //               if(doctor.doctor_id==item.fulfillment_id)
+          //               {
+          //                 doctor.item_id = item.id
+          //                 // results.message.order.categories.forEach(category => {
+          //                 //   if(category.id==item.category_id)
+          //                 //   {
+          //                 //     doctor.doctor_service_category = category.descriptor.name=="NA"?"":category.descriptor.name;
+          //                 //     doctor.item_id = item.id;
+          //                 //   }
+          //                 // });
+          //               }
+          //             });
+          //           });
+          //           this.doctorInfo[0].quote=results.message.order.quote;
+          //           this.searchResults.forEach(element => {
+          //             if(element.doctor_id==this.doctorInfo[0].doctor_id)
+          //             {
+          //               this.doctorInfo[0].dd = element;
+          //               if(element.start_time)
+          //               {
+          //                 console.log(element.start_time.time);
+          //                 // console.log()
+          //               }
+          //             }
+          //           });
+          //           console.log(this.doctorInfo);
+          //         }
+          //       }
+          //     })
+          //   }, (err) => {
+          //     if (err) {
+          //       console.log(err);
+          //     }
+          //   })
+          // }
 
-            var param = {
-              "transaction_id": this._commonService.transaction_id
-            }; // console.log("get_onSearchData",param);
-
-            this._api.get_onSearchData(param).subscribe(function (res) {
-              // console.log("get_onSearchData res");
-              // console.log(res);
-              _this.searchResults = [];
-              res.data.forEach(function (data) {
-                if (data.hasOwnProperty("request_body")) {
-                  var results = JSON.parse(data.request_body);
-                  console.log(results);
-
-                  if (results.status_code == 200 && results.hasOwnProperty("context") && results.hasOwnProperty("message") && results.message.hasOwnProperty("catalog") && results.message.catalog.hasOwnProperty("providers") && results.message.catalog.providers.length > 0) {
-                    results.message.catalog.providers.forEach(function (provider) {
-                      provider.fulfillments.forEach(function (fulfillment) {
-                        var isDoctorAlreadyAdded = false;
-
-                        for (var i = 0; i < _this.searchResults.length; i++) {
-                          if (_this.searchResults[i].doctor_id == fulfillment.person.id) {
-                            isDoctorAlreadyAdded = true;
-                            break;
-                          }
-                        }
-
-                        ;
-
-                        if (!isDoctorAlreadyAdded) {
-                          var expression = /[-a-zA-Z0-9@:%._\+~#=]{1,256}\.[a-zA-Z0-9()]{1,6}\b([-a-zA-Z0-9()@:%_\+.~#?&//=]*)?/gi;
-                          var regex = new RegExp(expression);
-
-                          if (!fulfillment.person.image.match(regex)) {
-                            fulfillment.person.image = "";
-                          }
-
-                          _this.searchResults.push({
-                            service_provider: results.message.catalog.descriptor.name,
-                            provider_id: provider.id,
-                            hospital_name: provider.descriptor.name,
-                            doctor_name: fulfillment.person.name,
-                            doctor_id: fulfillment.person.id,
-                            doctor_gender: fulfillment.person.gender.toLowerCase(),
-                            doctor_img: fulfillment.person.image,
-                            doctor_cred: fulfillment.person.cred,
-                            doctor_service_type: fulfillment.type == "NA" ? "" : fulfillment.type,
-                            doctor_service_category: "",
-                            item_id: null,
-                            start_time: fulfillment.start,
-                            end_time: fulfillment.end
-                          });
-                        }
-                      });
-                      provider.items.forEach(function (item) {
-                        _this.searchResults.forEach(function (doctor) {
-                          if (doctor.doctor_id == item.fulfillment_id) {
-                            provider.categories.forEach(function (category) {
-                              if (category.id == item.category_id) {
-                                doctor.doctor_service_category = category.descriptor.name == "NA" ? "" : category.descriptor.name;
-                                doctor.item_id = item.id;
-                              }
-                            });
-                          }
-                        });
-                      });
-                    });
-                  }
-                }
-              }); // console.log(this.searchResults);
-            }, function (err) {
-              if (err) {
-                console.error(err);
-              }
-            });
-          }
-        }, {
-          key: "get_onSelectData",
-          value: function get_onSelectData() {
-            var _this2 = this;
-
-            var param = {
-              "transaction_id": this._commonService.transaction_id
-            };
-
-            this._api.get_onSelectData(param).subscribe(function (res) {
-              // console.log(res);
-              res.data.forEach(function (data) {
-                if (data.hasOwnProperty("request_body")) {
-                  var results = JSON.parse(data.request_body); // console.log(results);
-
-                  _this2.doctorInfo = [];
-
-                  if (results.status_code == 200 && results.hasOwnProperty("context") && results.hasOwnProperty("message") && results.message.hasOwnProperty("order") && results.message.order.hasOwnProperty("provider")) {
-                    // console.log("------------->1");
-                    // (results.message.order.provider).forEach(providerData => {
-                    // console.log("------------->2");
-                    results.message.order.fulfillment.forEach(function (fulfillmentData) {
-                      console.log("------------->3");
-                      var expression = /[-a-zA-Z0-9@:%._\+~#=]{1,256}\.[a-zA-Z0-9()]{1,6}\b([-a-zA-Z0-9()@:%_\+.~#?&//=]*)?/gi;
-                      var regex = new RegExp(expression); // if(fulfillmentData.person.image!=null && !fulfillmentData.person.image.match(regex)) {
-                      //   fulfillmentData.person.image = "";
-                      // }
-
-                      if (fulfillmentData.agent.image != null && !fulfillmentData.agent.image.match(regex)) {
-                        fulfillmentData.agent.image = "";
-                      }
-
-                      _this2.doctorInfo.push({
-                        service_provider: results.message.order.provider.descriptor.name,
-                        // provider_id: providerData,
-                        // hospital_name: providerData, //.descriptor.name,
-                        doctor_name: fulfillmentData.agent.name,
-                        doctor_id: fulfillmentData.agent.id,
-                        doctor_gender: fulfillmentData.agent.gender.toLowerCase(),
-                        doctor_img: fulfillmentData.agent.image,
-                        doctor_cred: fulfillmentData.agent.cred,
-                        doctor_service_type: fulfillmentData.type == "NA" ? "" : fulfillmentData.type,
-                        doctor_service_category: "",
-                        item_id: null,
-                        quote: null
-                      });
-                    });
-                    results.message.order.items.forEach(function (item) {
-                      _this2.doctorInfo.forEach(function (doctor) {
-                        if (doctor.doctor_id == item.fulfillment_id) {
-                          doctor.item_id = item.id; // results.message.order.categories.forEach(category => {
-                          //   if(category.id==item.category_id)
-                          //   {
-                          //     doctor.doctor_service_category = category.descriptor.name=="NA"?"":category.descriptor.name;
-                          //     doctor.item_id = item.id;
-                          //   }
-                          // });
-                        }
-                      });
-                    });
-                    _this2.doctorInfo[0].quote = results.message.order.quote;
-
-                    _this2.searchResults.forEach(function (element) {
-                      if (element.doctor_id == _this2.doctorInfo[0].doctor_id) {
-                        _this2.doctorInfo[0].dd = element;
-
-                        if (element.start_time) {
-                          console.log(element.start_time.time); // console.log()
-                        }
-                      }
-                    });
-
-                    console.log(_this2.doctorInfo);
-                  }
-                }
-              });
-            }, function (err) {
-              if (err) {
-                console.log(err);
-              }
-            });
-          }
         }, {
           key: "sortDataFromArray",
           value: function sortDataFromArray() {
-            var _this3 = this;
+            var _this = this;
 
-            console.log(this._commonService.searchResults.fulfillments[this.search_index]);
+            // console.log(this._commonService.searchResults.fulfillments[this.search_index]);
             setTimeout(function () {
               var date = new Date();
-              var start_time = new Date("".concat(date.getFullYear(), "-01-01") + _this3._commonService.searchResults.fulfillments[_this3.search_index].start.time.timestamp);
-              var end_time = new Date("".concat(date.getFullYear(), "-01-01") + _this3._commonService.searchResults.fulfillments[_this3.search_index].end.time.timestamp);
+              var start_time = new Date("".concat(date.getFullYear(), "-01-01") + _this._commonService.searchResults.fulfillments[_this.search_index].start.time.timestamp);
+              var end_time = new Date("".concat(date.getFullYear(), "-01-01") + _this._commonService.searchResults.fulfillments[_this.search_index].end.time.timestamp);
 
-              _this3.sortTimeSLots(start_time.getHours(), start_time.getMinutes(), end_time.getHours(), end_time.getMinutes());
-            }, 500);
+              _this.sortTimeSLots(start_time.getHours(), start_time.getMinutes(), end_time.getHours(), end_time.getMinutes());
+            }, 100);
             /*var results = this._commonService.searchResults[this.search_index]
             console.log(results);
                  this.doctorInfo.push({
@@ -662,7 +657,7 @@
         }, {
           key: "init",
           value: function init() {
-            var _this4 = this;
+            var _this2 = this;
 
             var time_slot_divs = $("#time_slots_div").find('ion-chip');
             var time_slot;
@@ -688,11 +683,12 @@
               slot_end_time: slot_end_time
             };
 
-            this._api.init(param).subscribe(function (res) {
-              console.log(res);
+            this._commonService.presentLoading();
 
+            this._api.init(param).subscribe(function (res) {
+              // console.log(res);
               if (res.success && res.body.message.ack.status == "ACK") {
-                _this4._router.navigate(["/dashboard/collect-payment", _this4.search_index]);
+                _this2._router.navigate(["/dashboard/collect-payment", _this2.search_index]);
               }
             }, function (err) {
               if (err) {
@@ -883,7 +879,7 @@
 
             _angular_core__WEBPACK_IMPORTED_MODULE_2__["ɵɵadvance"](3);
 
-            _angular_core__WEBPACK_IMPORTED_MODULE_2__["ɵɵtextInterpolate3"]("", ctx._commonService.searchResults.fulfillments[ctx.search_index].type, " ", ctx._commonService.searchResults.fulfillments[ctx.search_index].agent.tags["@abdm/gov/in/speciality"], " ", ctx._commonService.searchResults.fulfillments[ctx.search_index].agent.tags["@abdm/gov/in/education"] ? "/" + ctx._commonService.searchResults.fulfillments[ctx.search_index].agent.tags["@abdm/gov/in/education"] : "", "");
+            _angular_core__WEBPACK_IMPORTED_MODULE_2__["ɵɵtextInterpolate3"]("", ctx._commonService.searchResults.fulfillments[ctx.search_index].type, " / ", ctx._commonService.searchResults.fulfillments[ctx.search_index].items.descriptor.name, " ", ctx._commonService.searchResults.fulfillments[ctx.search_index].agent.tags["@abdm/gov/in/education"] ? "/" + ctx._commonService.searchResults.fulfillments[ctx.search_index].agent.tags["@abdm/gov/in/education"] : "", "");
 
             _angular_core__WEBPACK_IMPORTED_MODULE_2__["ɵɵadvance"](4);
 

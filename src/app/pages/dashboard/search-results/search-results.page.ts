@@ -10,164 +10,61 @@ import { CommonService } from 'src/app/services/common/common.service';
 })
 export class SearchResultsPage implements OnInit {
 
+  public isSocketTrigger : boolean = false;
+
   constructor(
     public _router: Router,
     public _api: ApiService,
     public _commonService: CommonService
   ) {
+    if(!this._commonService.searchResults.hasOwnProperty("fulfillments"))
+    {
+      this._commonService.searchResults.fulfillments=[];
+    }
     if(this._commonService.transaction_id==null || this._commonService.transaction_id==undefined)
     {
-      this._commonService.transaction_id = "cc4c1bbc-8f76-4b15-aeb5-1401be1fe1ec";
-      // this._router.navigate(["/dashboard/"]);
+      this._router.navigate(["/dashboard/"]);
     }
   }
 
   ngOnInit() {
-    this.get_onSearchData();
-    // this.getdataTest();
-    this._commonService.SOCKET.on('on_search', (data) => {
+    setTimeout(() => {
       this.get_onSearchData();
+    }, 500);
+    this._commonService.SOCKET.on('on_search', (data) => {
+      this.isSocketTrigger = true;
     });
   }
 
-  getdataTest(res: any)
+  sortData(res: any)
   {
-    // var res = {
-    //   "context": {
-    //     "domain": "NA",
-    //     "country": "IND",
-    //     "city": "PUNE",
-    //     "action": "search",
-    //     "core_version": "NA",
-    //     "message_id": "104ab729-47e9-4f43-a6d5-10ccf5cf7cc1",
-    //     "transaction_id": "7fbbac2e-0a94-4676-8b5a-7cf6143533c9",
-    //     "timestamp": "2022-07-16T12:12:59.000000",
-    //     "provider_id": "plus91-HSPA",
-    //     "provider_uri": "https://ec3c-182-72-250-90.ngrok.io"
-    //   },
-    //   "message": {
-    //     "catalog": {
-    //       "descriptor": {
-    //         "name": "Korle-Bu Teaching Hospital- Polyclinic"
-    //       },
-    //       "items": [
-    //         {
-    //           "id": "1726",
-    //           "descriptor": {
-    //             "name": "Test the x ray radiology"
-    //           },
-    //           "price": {
-    //             "currency": "INR",
-    //             "value": "23.00"
-    //           },
-    //           "fulfillment_id": "863"
-    //         },
-    //         {
-    //           "id": "1726",
-    //           "descriptor": {
-    //             "name": "Test the x ray radiology"
-    //           },
-    //           "price": {
-    //             "currency": "INR",
-    //             "value": "23.00"
-    //           },
-    //           "fulfillment_id": "879"
-    //         }
-    //       ],
-    //       "fulfillments": [
-    //         {
-    //           "id": "863",
-    //           "type": "X ray",
-    //           "agent": {
-    //             "id": "863",
-    //             "name": "Dr TNA Archampong",
-    //             "gender": "M",
-    //             "tags": {
-    //               "@abdm/gov/in/first_consultation": "23.00",
-    //               "@abdm/gov/in/upi_id": "9999999999@okhdfc",
-    //               "@abdm/gov/in/follow_up": null,
-    //               "@abdm/gov/in/experience": null,
-    //               "@abdm/gov/in/languages": "Eng, Hin",
-    //               "@abdm/gov/in/speciality": "Radiology",
-    //               "@abdm/gov/in/lab_report_consultation": null,
-    //               "@abdm/gov/in/education": null,
-    //               "@abdm/gov/in/hpr_id": null,
-    //               "@abdm/gov/in/signature": null
-    //             }
-    //           },
-    //           "start": {
-    //             "time": {
-    //               "timestamp": "T18:30+00:00"
-    //             }
-    //           },
-    //           "end": {
-    //             "time": {
-    //               "timestamp": "T18:10+00:00"
-    //             }
-    //           }
-    //         },
-    //         {
-    //           "id": "879",
-    //           "type": "X ray",
-    //           "agent": {
-    //             "id": "879",
-    //             "name": "Prof JH Addy",
-    //             "gender": "M",
-    //             "tags": {
-    //               "@abdm/gov/in/first_consultation": "23.00",
-    //               "@abdm/gov/in/upi_id": "9999999999@okhdfc",
-    //               "@abdm/gov/in/follow_up": null,
-    //               "@abdm/gov/in/experience": null,
-    //               "@abdm/gov/in/languages": "Eng, Hin",
-    //               "@abdm/gov/in/speciality": "Radiology",
-    //               "@abdm/gov/in/lab_report_consultation": null,
-    //               "@abdm/gov/in/education": null,
-    //               "@abdm/gov/in/hpr_id": null,
-    //               "@abdm/gov/in/signature": null
-    //             }
-    //           },
-    //           "start": {
-    //             "time": {
-    //               "timestamp": "T18:30+00:00"
-    //             }
-    //           },
-    //           "end": {
-    //             "time": {
-    //               "timestamp": "T18:10+00:00"
-    //             }
-    //           }
-    //         }
-    //       ]
-    //     }
-    //   },
-    //   "status_code": 200
-    // }
-
     if(res.status_code==200)
     {
       if(res.hasOwnProperty("context") && res.hasOwnProperty("message") && res.message.hasOwnProperty("catalog"))
       {
         if(res.message.catalog.hasOwnProperty("fulfillments"))
         {
-          if(!this._commonService.searchResults.hasOwnProperty("fulfillments"))
-          {
-            this._commonService.searchResults.fulfillments=[];
-          }
-          res.message.catalog.fulfillments.forEach(fulfillment => {
-            res.message.catalog.items.forEach(item => {
+          res.message.catalog.fulfillments.forEach(async (fulfillment) => {
+            res.message.catalog.items.forEach((item) => {
               if(parseInt(fulfillment.id)==parseInt(item.fulfillment_id))
               {
-                var fulfillmentObj = fulfillment;
+                let fulfillmentObj = fulfillment;
                 fulfillmentObj["items"] = item;
                 fulfillmentObj["context"] = res.context;
-                this._commonService.searchResults.fulfillments.push(fulfillmentObj);
+                let tempArr = JSON.stringify(fulfillmentObj);
+                this._commonService.searchResults.fulfillments.push(JSON.parse(tempArr));
               }
             });
           });
+          if(this.isSocketTrigger)
+          {
+            this.isSocketTrigger = false;
+            this.get_onSearchData();
+          }
         }
       }
-      console.log(this._commonService.searchResults.fulfillments);
     }
+    console.log("fulfillments count -> ",(this._commonService.searchResults.fulfillments).length);
   }
 
   get_onSearchData()
@@ -175,17 +72,15 @@ export class SearchResultsPage implements OnInit {
     let param = {
       "transaction_id": this._commonService.transaction_id
     }
-    // console.log(param);
+    this._commonService.presentLoading(2000);
     this._api.get_onSearchData(param).subscribe((res: any) => {
-      console.log("get_onSearchData res");
-      // console.log(res);
-      this._commonService.searchResults = [];
+      this._commonService.searchResults.fulfillments=[];
+      // this._commonService.presentLoading(3000);
       res.data.forEach(data => {
         if(data.hasOwnProperty("request_body"))
         {
           var results = JSON.parse(data.request_body);
-          console.log(results);
-          this.getdataTest(results);
+          this.sortData(results);
           
           /*if(results.status_code==200 && results.hasOwnProperty("context") && results.hasOwnProperty("message") && results.message.hasOwnProperty("catalog"))
           {

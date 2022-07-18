@@ -34,5 +34,18 @@ export class AppComponent {
         https://capacitor.ionicframework.com/docs/apis/splash-screen#hiding-the-splash-screen
     */
     SplashScreen.hide();
+
+    this._commonService.SOCKET.on('on_search', (data) => {
+      console.log("Socket Triggered: on_search", data);
+      // this._commonService.transaction_id= data.context.transaction_id;
+    });
+    this._commonService.SOCKET.on('on_confirm', (data) => {
+      console.log("Socket Triggered: on_confirm", data);
+      this._commonService.searchResults.confirm = data;
+    });
+    this._commonService.SOCKET.on('on_init', (data) => {
+      console.log("Socket Triggered: on_init", data);
+      this._commonService.searchResults.order = data;
+    });
   }
 }
